@@ -1,38 +1,38 @@
-Role Name
-=========
+# ocp_configure_gluster
 
-A brief description of the role goes here.
+## Description:
 
-Requirements
-------------
+This role sets a storageclass (by default glusterfs-storage) to be the default storageclass.
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+## Behaviour:
 
-Role Variables
---------------
+**Feature:** set a default storageclass
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+As a PaaS Operator
+I want to set a default storageclass
+so that deployment configurations will be able to allocate storage without modification.
 
-Dependencies
-------------
+- **Scenario:** OCP cluster is configured with a default storage class
+- **Given:** a correctly deployed OCP cluster
+- **Given:** the cluster has a storageclass defined
+- **When:** the deployment is complete
+- **Then:** assign default storage
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+## Configuration:
 
-Example Playbook
-----------------
+A list of the external variables used by the role.
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+| Variable  | Description  | Example  | 
+|---|---|---|
+| **storageclass**  | The storageclass to configure as default  |  (defaults to 'glusterfs-storage') |
 
-    - hosts: servers
-      roles:
-         - { role: ocp_configure_gluster, x: 42 }
+## Usage:
 
-License
--------
+How to invoke the role from a playbook:
 
-BSD
-
-Author Information
-------------------
-
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+```yaml
+- name: Assign default storage
+  include_role:
+    name: ocp_configure_gluster
+  vars:
+    storageclass: glusterfs-storage

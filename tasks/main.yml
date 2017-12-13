@@ -1,2 +1,5 @@
 ---
 # tasks file for ocp_configure_gluster
+- name: Set storageclass provided to be default storageclass
+  shell: "PATH=$PATH:/usr/local/bin patch storageclass {{ storageclass }} -p '{\"metadata\": {\"annotations\": {\"storageclass.kubernetes.io/is-default-class\": \"true\"}}}'"
+
